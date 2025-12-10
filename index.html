@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수학습관 - 2026 겨울방학 특강</title>
+    <style>
+        /* 폰트 임포트 (Noto Sans KR 사용 권장) */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* 기본 색상 및 폰트 설정 */
+        :root {
+            --primary-color: #1B263B; /* 진한 네이비 (텍스트, 제목) */
+            --accent-color: #6F42C1; /* 보라색 (강조, 아이콘) */
+            --secondary-color: #4A8FE4; /* 밝은 파랑 (그라데이션 시작) */
+            --bg-light: #F8F9FA; /* 배경 연한 회색 */
+            --text-dark: #333;
+            --text-light: #666;
+            --border-color: #EAECEF;
+            --qna-highlight: #6F42C1; /* QnA 질문 헤더 강조 색상 */
+            --answer-border: #DCDDE0; /* 답변 내용 일반 경계선 색상 */
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            background: var(--bg-light);
+            min-height: 100vh;
+            padding: 20px 0;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 헤더 */
+        .header {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            padding: 30px 0;
+            animation: fadeInDown 0.8s ease;
+        }
+        
+        .header h1 {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 22px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        /* 섹션 공통 스타일 */
+        .schedule-section, .qna-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 45px rgba(27, 38, 59, 0.1);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease;
+        }
+
+        .schedule-section:hover, .qna-section:hover {
+            transform: translateY(-3px);
+        }
+        
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 5px;
+            background: var(--accent-color);
+            border-radius: 3px;
+        }
+        
+        /* 시간표 테이블 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0 auto;
+            font-size: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 15px 10px;
+            text-align: center;
+            word-break: keep-all;
+            line-height: 1.5;
+            vertical-align: middle;
+            color: var(--text-dark);
+        }
+        
+        th {
+            background-color: var(--primary-color);
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.5px;
+        }
+		
+
+        /* --- 원본 색상 복구 --- */
+		.gry { background-color: #F0F4F8; }
+        .pink { background-color: #ffcccc; }
+        .yellow { background-color: #fff1c8; }
+        .purple { background-color: #e4d5e6; }
+        .green { background-color: #e3f0d7; }
+        .peach { background-color: #fbccaa; }
+        .cyan { background-color: #a3e2de; }
+        .blue { background-color: #c9e1b0; }
+        /* ---------------------- */
+        
+        /* QnA 섹션 (아코디언) */
+        .qna-section {
+            padding: 40px 50px;
+        }
+
+        .accordion-item {
+            border: 1px solid var(--border-color); /* 전체 아이템에 기본 테두리 */
+            margin-bottom: 10px; /* 아이템 간 간격 증가 */
+            background-color: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .accordion-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .accordion-header {
+            padding: 18px 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+            border-radius: 10px;
+            /* 접힌 상태에서는 별도 라인 제거 (기본 item border만 유지) */
+            border: none; 
+        }
+        
+        .accordion-header:hover {
+            background-color: #F0F4F8;
+        }
+
+        /* 활성화된 헤더 스타일 */
+        .accordion-header.active-q {
+            background-color: var(--bg-light); 
+            border-bottom: 1px solid var(--qna-highlight); /* 열렸을 때만 보라색 하단 라인 */
+            border-top-left-radius: 10px; /* 부모 아이템의 border-radius와 일치 */
+            border-top-right-radius: 10px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        /* 활성화된 아이템의 부모(item) 테두리 조정 */
+        .accordion-header.active-q + .accordion-content {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        
+        .accordion-question {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .question-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);
+        }
+        
+        .accordion-icon {
+            font-size: 20px;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+            font-weight: 700;
+        }
+        
+        .accordion-icon.active {
+            transform: rotate(180deg);
+        }
+        
+        /* --- 답변 내용 (A) 스타일 조정 --- */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            
+            /* 답변 콘텐츠 테두리 조정 (Q가 열렸을 때만 보이도록) */
+            border-left: 1px solid var(--answer-border); 
+            border-right: 1px solid var(--answer-border); 
+            border-bottom: 1px solid var(--answer-border);
+            
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* 아코디언이 열렸을 때 .accordion-content의 테두리를 부모 아이템의 테두리와 연결 */
+        .accordion-item {
+            overflow: hidden; /* 자식 요소의 box-shadow가 튀어나오지 않도록 */
+        }
+
+        .accordion-content-inner {
+            padding: 20px 25px 30px 25px;
+            color: var(--text-dark);
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .answer-wrapper {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .answer-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--secondary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+            font-size: 18px;
+            margin-top: 2px;
+        }
+        
+        /* QnA 답변 내부 스타일 */
+        .accordion-content-inner table {
+            font-size: 14px;
+        }
+        .accordion-content-inner th {
+            background-color: #E6E8EB;
+            color: var(--primary-color);
+            padding: 10px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .accordion-content-inner td {
+            padding: 10px;
+            text-align: left;
+        }
+        .accordion-content-inner td:first-child {
+            background-color: #F7F7F9;
+            font-weight: 600;
+            text-align: center;
+            color: var(--primary-color);
+        }
+		/* 다운로드 버튼 영역 */
+.download-section {
+    text-align: center;
+    margin: 60px 0 40px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--secondary-color), var(--accent-color));
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(111, 66, 193, 0.25);
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(111, 66, 193, 0.35);
+}
+
+
+        /* ---------------------------------- */
+
+        /* 애니메이션 (기존 유지) */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* 반응형 */
+        @media (max-width: 992px) {
+            .header h1 { font-size: 48px; }
+            .section-title { font-size: 28px; }
+            .accordion-question { font-size: 17px; }
+            th, td { padding: 12px 8px; font-size: 14px; }
+        }
+
+        @media (max-width: 768px) {
+            body { padding: 10px 0; }
+            .container { padding: 0 15px; }
+            
+            .header h1 { font-size: 38px; }
+            .header p { font-size: 18px; }
+            
+            .schedule-section, .qna-section { padding: 30px 20px; }
+            .section-title { font-size: 26px; margin-bottom: 30px; }
+            
+            table { font-size: 13px; }
+            th, td { padding: 10px 5px; }
+            
+            .accordion-header { padding: 15px 20px; }
+            .accordion-question { font-size: 16px; gap: 10px; }
+            .question-icon { width: 28px; height: 28px; font-size: 16px; }
+            .answer-icon { width: 28px; height: 28px; font-size: 16px; }
+            .accordion-content-inner { padding: 15px 20px 20px 20px; font-size: 15px; }
+            .answer-wrapper { gap: 10px; }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 { font-size: 32px; }
+            .header p { font-size: 16px; }
+            
+            .schedule-section, .qna-section { padding: 20px 15px; }
+            .section-title { font-size: 22px; }
+            
+            table { font-size: 11px; }
+            th, td { padding: 8px 3px; line-height: 1.4; }
+            
+            .accordion-question { font-size: 15px; }
+            .question-icon { width: 24px; height: 24px; font-size: 14px; }
+            .answer-icon { width: 24px; height: 24px; font-size: 14px; }
+            .accordion-content-inner { padding: 10px 15px 15px 15px; font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>수학습관</h1>
+            <p>2026 캘린더 안내</p>
+        </div>
+        
+        <div class="schedule-section">
+            <h2 class="section-title">✨ 수업 시간표</h2>
+            <table>
+    <thead>
+        <tr>
+            <th rowspan="2">구분</th>
+            <th colspan="2" class="term-bg">ACE트랙<br>(수능완성반)</th>
+            <th colspan="2" class="term-bg">고등선행반</th>
+        </tr>
+        <tr>
+            <th style="background-color: #F0F4F8; color: #000;">주중</th>
+            <th style="background-color: #F0F4F8; color: #000;">주말</th>
+            <th style="background-color: #F0F4F8; color: #000;">주중</th>
+            <th style="background-color: #F0F4F8; color: #000;">주말</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan="2" class="term-bg">2026<br>겨울특강</td>
+            <td rowspan="2" class="pink"><b>대수</b></td>
+            <td></td>
+            <td class="yellow">중등기하<br>(<b>2-2</b>)</td>
+            <td rowspan="2"></td>
+        </tr>
+        <tr>
+            <td class="cyan">모의고사반<br>(<b>공수 1·2</b>)</td>
+            <td class="yellow">중등기하<br>(<b>3-2</b>)</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">1학기</td>
+            <td rowspan="3" class="purple"><b>미적분 I</b></td>
+            <td></td>
+            <td rowspan="2" class="peach"><b>공통수학 1</b></td>
+            <td class="yellow">모의고사반<br>(<b>고1 3모</b>)</td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="pink">모의고사반<br>(<b>~대수</b>)</td>
+        </tr>
+        <tr>
+            <td class="term-bg">여름방학</td>
+            <td rowspan="3" class="cyan"><b>공통수학 2</b></td>
+            <td rowspan="2"></td>
+        </tr>
+        <tr>
+            <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">2학기</td>
+            <td rowspan="2" class="green"><b>확률과 통계</b></td>
+            <td rowspan="2"></td>
+        </tr>
+        <tr>
+            <td class="peach">모의고사반<br>(<b>공수 1</b>)</td>
+        </tr>
+        <tr>
+            <td class="term-bg">겨울방학</td>
+            <td colspan="2" class="blue">모의고사반 FINAL<br>(<b>2028 통합수능</b>)</td>
+            <td colspan="2"><b>대수</b> 선행 시작<br>(ACE 트랙)</td>
+        </tr>
+    </tbody>
+</table>
+        </div>
+        
+        <div class="qna-section">
+            <h2 class="section-title">Q&A</h2>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-question">
+                        <span class="question-icon">Q</span>
+                        <span>수업은 어떻게 진행되나요?</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="answer-wrapper">
+                            <span class="answer-icon">A</span>
+                            <div style="flex-grow: 1;">
+                                <p>수학습관의 수업은 학습 효율을 극대화하기 위해 다음 단계를 따르는 **맞춤형 소수정예**로 진행됩니다.</p>
+                                
+                                <ul style="margin-top: 15px; margin-left: 20px; list-style: disc; padding-left: 0;">
+                                    <li style="margin-bottom: 8px;">**개념 완벽 설명:** 핵심 개념을 심도 있게 이해할 때까지 설명합니다.</li>
+                                    <li style="margin-bottom: 8px;">**문제 풀이 및 코칭:** 개별 수준에 맞는 충분한 문제 풀이 시간을 제공하고 1:1 코칭을 진행합니다.</li>
+                                    <li>**오답 관리 및 피드백:** 오답 노트를 기반으로 취약점을 분석하고 완벽한 이해를 목표로 합니다.</li>
+                                </ul>
+                                
+                                <p style="margin-top: 25px; font-weight: bold; color: var(--primary-color);">▶ 정규 수업 구성 예시 (총 3시간)</p>
+                                <table style="width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 15px; border-radius: 5px; overflow: hidden;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30%; border: 1px solid #ddd;">시간</th>
+                                            <th style="border: 1px solid #ddd;">진행 내용</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd;">1교시 (30분)</td>
+                                            <td style="border: 1px solid #ddd;">숙제 검사 및 질의응답 (취약점 점검)</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd;">2교시 (60분)</td>
+                                            <td style="border: 1px solid #ddd;">새로운 핵심 개념 및 원리 설명</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="border: 1px solid #ddd;">3교시 (90분)</td>
+                                            <td style="border: 1px solid #ddd;">개별 맞춤 문제 풀이 및 1:1 집중 코칭</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-question">
+                        <span class="question-icon">Q</span>
+                        <span>ACE트랙과 고등선행반의 차이는 무엇인가요?</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="answer-wrapper">
+                            <span class="answer-icon">A</span>
+                            <span>**ACE트랙**은 수능 완성을 목표로 하는 **심화 과정**으로, 이미 기본 과정을 마친 학생들을 위한 트랙입니다. **고등선행반**은 중학생 또는 고등학교 과정을 준비하는 학생들을 위한 **선행학습 과정**입니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-question">
+                        <span class="question-icon">Q</span>
+                        <span>수강료는 어떻게 되나요?</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="answer-wrapper">
+                            <span class="answer-icon">A</span>
+                            <span>수강료는 과정별, 주중/주말반에 따라 다르게 책정됩니다. 자세한 수강료 안내는 **전화 또는 방문 상담**을 통해 확인하실 수 있습니다. 형제 할인 등 다양한 할인 혜택도 제공하고 있습니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-question">
+                        <span class="question-icon">Q</span>
+                        <span>중간에 반 변경이 가능한가요?</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="answer-wrapper">
+                            <span class="answer-icon">A</span>
+                            <span>학생의 학습 진도와 이해도에 따라 **반 변경이 가능**합니다. 정기적인 테스트와 상담을 통해 학생에게 가장 적합한 반 배치를 도와드립니다. 변경 시에는 별도 상담이 필요합니다.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item">
+                <div class="accordion-header" onclick="toggleAccordion(this)">
+                    <div class="accordion-question">
+                        <span class="question-icon">Q</span>
+                        <span>등록은 어떻게 하나요?</span>
+                    </div>
+                    <span class="accordion-icon">▼</span>
+                </div>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <div class="answer-wrapper">
+                            <span class="answer-icon">A</span>
+                            <span>**전화 상담 또는 방문 상담 후 레벨테스트**를 진행하여 적합한 반을 배정받으신 후 등록하실 수 있습니다. 선착순 마감되므로 빠른 상담을 권장드립니다.</span>
+                        </div>
+                    </div>
+                </div>
+				    <div class="download-section">
+        <a href="curriculum.pdf" download class="download-btn">
+            📥 커리큘럼 다운로드
+        </a>
+    </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function toggleAccordion(header) {
+            const item = header.closest('.accordion-item');
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('.accordion-icon');
+            const question = header;
+
+            const allContents = document.querySelectorAll('.accordion-content');
+            const allIcons = document.querySelectorAll('.accordion-icon');
+            const allQuestions = document.querySelectorAll('.accordion-header');
+            
+            // 다른 아코디언 닫기
+            allContents.forEach(item => {
+                if (item !== content) {
+                    item.style.maxHeight = null;
+                    item.classList.remove('active-content');
+                }
+            });
+            
+            allIcons.forEach(item => {
+                if (item !== icon) {
+                    item.classList.remove('active');
+                }
+            });
+
+            allQuestions.forEach(item => {
+                if (item !== question) {
+                    item.classList.remove('active-q');
+                }
+            });
+            
+            // 현재 아코디언 토글
+            if (content.style.maxHeight) {
+                content.style.maxHeight = null;
+                icon.classList.remove('active');
+                question.classList.remove('active-q');
+            } else {
+                // max-height 계산을 위해 일시적으로 max-height를 해제
+                content.style.maxHeight = 'none';
+                const scrollHeight = content.scrollHeight + 1; // 1px 추가하여 애니메이션 오류 방지
+                // 다시 max-height를 0으로 설정 후 실제 scrollHeight로 설정하여 애니메이션 적용
+                content.style.maxHeight = '0px';
+                // requestAnimationFrame을 사용하여 DOM이 업데이트되도록 대기
+                requestAnimationFrame(() => {
+                    content.style.maxHeight = scrollHeight + 'px';
+                });
+                icon.classList.add('active');
+                question.classList.add('active-q');
+            }
+        }
+    </script>
+</body>
+</html>
