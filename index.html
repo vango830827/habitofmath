@@ -70,7 +70,7 @@
         .schedule-section, .qna-section {
             background: white;
             border-radius: 20px;
-            padding: 40px;
+            padding: 80px 40PX; 
             margin-bottom: 40px;
             box-shadow: 0 15px 45px rgba(27, 38, 59, 0.1);
             border: 1px solid var(--border-color);
@@ -91,7 +91,7 @@
             padding-bottom: 15px;
         }
         
-        .section-title::after {
+ /*       .section-title::after {
             content: '';
             position: absolute;
             bottom: 0;
@@ -102,6 +102,9 @@
             background: var(--accent-color);
             border-radius: 3px;
         }
+		.no-underline::after {
+			display: none;
+		} */
         
         /* 시간표 테이블 */
         table {
@@ -142,10 +145,16 @@
         .blue { background-color: #c9e1b0; }
         /* ---------------------- */
         
+		.final-strong {
+    border: 2px solid var(--primary-color) !important;
+    font-weight: 700;
+}
+		
         /* QnA 섹션 (아코디언) */
         .qna-section {
-            padding: 40px 50px;
+            padding: 80px 80px;
         }
+		
 
         .accordion-item {
             border: 1px solid var(--border-color); /* 전체 아이템에 기본 테두리 */
@@ -216,7 +225,7 @@
         }
         
         .accordion-icon {
-            font-size: 20px;
+            font-size: 16px;
             color: var(--accent-color);
             transition: transform 0.3s ease;
             font-weight: 700;
@@ -249,7 +258,7 @@
         }
 
         .accordion-content-inner {
-            padding: 20px 25px 30px 25px;
+            padding: 20px 40px 30px 25px;
             color: var(--text-dark);
             font-size: 16px;
             line-height: 1.7;
@@ -320,7 +329,164 @@
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(111, 66, 193, 0.35);
 }
+/* 1학기 행 높이 보정 */
+.term-row-large td {
+    min-height: 110px;           /* 겨울특강과 비슷한 체감 높이 */
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+@media (max-width: 768px) {
+    .term-row-large td {
+        min-height: 70px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+		
+		.mock-layout {
+    text-align: left;
+    max-width: 900px;
+    margin: 0 auto;
+}
 
+/* 상단 배지 */
+.mock-badge {
+    display: inline-block;
+    background: #7C6AE6;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* 타이틀 */
+.mock-title {
+    font-size: 30px;
+    font-weight: 800;
+    line-height: 1.4;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.mock-title span {
+    color: var(--accent-color);
+}
+
+/* 설명 */
+.mock-desc {
+    font-size: 16px;
+    color: var(--text-light);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.mock-desc span {
+    text-decoration: underline;
+}
+
+/* 링크 */
+.mock-link {
+    display: inline-block;
+    color: var(--accent-color);
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-decoration: none;
+}
+
+/* 흐름 카드 */
+.mock-flow-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #F8F9FB;
+    border-radius: 16px;
+    padding: 20px;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.flow-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 14px 20px;
+    font-weight: 700;
+    color: #000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+}
+
+.flow-arrow {
+    font-size: 20px;
+    color: var(--accent-color);
+    font-weight: 900;
+}
+
+/* 반복 문구 */
+.mock-repeat {
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+/* 하단 포인트 박스 */
+.mock-point-box {
+    background: #E9EEF6;
+    border-radius: 16px;
+    padding: 22px 24px;
+}
+
+.mock-point-box p {
+    font-size: 15px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #000;
+}
+
+.mock-point-box p:last-child {
+    margin-bottom: 0;
+}
+		.learning-keywords {
+    border-left: 4px solid var(--accent-color); /* 보라색 세로 바 */
+    padding-left: 16px;
+    margin: 16px 0 24px;
+}
+
+.learning-keywords p {
+    margin: 6px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+.learning-keywords strong {
+    font-weight: 700;
+}
+
+/* ===== 모바일 대응 ===== */
+@media (max-width: 768px) {
+    .mock-title {
+        font-size: 22px;
+    }
+
+    .mock-flow-box {
+        flex-direction: column;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+
+    .mock-layout {
+        text-align: center;
+    }
+
+    .mock-point-box {
+        text-align: left;
+    }
+	
+}
 
         /* ---------------------------------- */
 
@@ -340,7 +506,7 @@
             .header h1 { font-size: 48px; }
             .section-title { font-size: 28px; }
             .accordion-question { font-size: 17px; }
-            th, td { padding: 12px 8px; font-size: 14px; }
+            th, td { padding: 12px 8px; font-size: 12px; }
         }
 
         @media (max-width: 768px) {
@@ -374,28 +540,192 @@
             table { font-size: 11px; }
             th, td { padding: 8px 3px; line-height: 1.4; }
             
-            .accordion-question { font-size: 15px; }
+            .accordion-question { font-size: 15px; padding: 0 10px;}
             .question-icon { width: 24px; height: 24px; font-size: 14px; }
             .answer-icon { width: 24px; height: 24px; font-size: 14px; }
-            .accordion-content-inner { padding: 10px 15px 15px 15px; font-size: 14px; }
+            .accordion-content-inner { padding: 20px 25px 25px 15px; font-size: 14px; }        
+			.accordion-icon {font-size: 12px; }
         }
+		/* 커리큘럼 요약 카드 내부 */
+.track-summary-card {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.track-item {
+    background: #F8F9FA;
+    border-radius: 16px;
+    padding: 22px 20px;
+    border: 1px solid var(--border-color);
+}
+
+.track-item h3 {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.track-item p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dark);
+}
+
+/* 트랙별 컬러 포인트 */
+.track-item.high {
+    border-left: 5px solid var(--secondary-color);
+}
+
+.track-item.ace {
+    border-left: 5px solid var(--accent-color);
+}
+
+.track-item.mock {
+    border-left: 5px solid #2FA4A9;
+}
+		@media (max-width: 768px) {
+    .track-summary-card {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .track-item {
+        padding: 18px;
+    }
+
+    .track-item h3 {
+        font-size: 17px;
+    }
+
+    .track-item p {
+        font-size: 14px;
+    }
+}
+		.mock-card-inner {
+    max-width: 1000px;
+    margin: 30px auto;
+}
+		/* 모의고사 설명 카드 */
+.mock-explain-content {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--text-dark);
+}
+
+.mock-lead {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+    color: var(--primary-color);
+}
+
+.mock-explain-content p {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+/* 학습 흐름 강조 */
+.mock-flow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.mock-flow span {
+    background: #F4F6F9;
+    padding: 10px 16px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
+}
+		@media (max-width: 768px) {
+   .mock-flow {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .mock-flow span {
+        width: 100%;
+        max-width: 260px;
+    }
+
+    /* 화살표 span 처리 */
+    .mock-flow span:nth-child(even) {
+        background: transparent;
+        border: none;
+        padding: 0;
+        font-size: 0;          /* 기존 → 숨김 */
+        line-height: 1;
+        position: relative;
+    }
+
+    .mock-flow span:nth-child(even)::before {
+        content: "↓";
+        font-size: 22px;
+        font-weight: 900;
+        color: var(--accent-color);
+        display: block;
+        line-height: 1;
+    }
+			
+}
+		
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>수학습관</h1>
-            <p>2026 캘린더 안내</p>
+            <h1>2026 수학습관 중등부 커리큘럼</h1>
+            <p>수능 실전력을 앞당기는 고등 선행</p>
         </div>
         
-        <div class="schedule-section">
-            <h2 class="section-title">✨ 수업 시간표</h2>
+		<div class="schedule-section track-summary-section">
+    <h2 class="section-title">📌 반별 안내</h2>
+
+    <div class="track-summary-card">
+        <div class="track-item high">
+            <h3>고등선행반</h3>
+            <p>
+                1–2월 <b>중등 기하</b>로 시작해<br>
+                연내에 <b>공통수학 1·2</b>를 끝냅니다.
+            </p>
+        </div>
+
+        <div class="track-item ace">
+            <h3>수능완성반 (ACE 트랙)</h3>
+            <p>
+                <b>2028 통합수능 전 범위</b>를<br>
+                한 해 안에 마무리합니다.
+            </p>
+        </div>
+
+        <div class="track-item mock">
+            <h3>모의고사반</h3>
+            <p>
+				주말 모의고사반은 선행 내용을 <b>장기기억</b>으로 만들고,
+                <b>수능형 사고</b>를 일찍 익히는 최고의 복습 훈련입니다.
+            </p>
+        </div>
+    </div>
+</div>
+		
+        <div class="schedule-section">			
+            <h2 class="section-title no-underline">✨ 연간 진도표</h2>
             <table>
     <thead>
         <tr>
             <th rowspan="2">구분</th>
-            <th colspan="2" class="term-bg">ACE트랙<br>(수능완성반)</th>
             <th colspan="2" class="term-bg">고등선행반</th>
+            <th colspan="2" class="term-bg">ACE트랙<br>(수능완성반)</th>
         </tr>
         <tr>
             <th style="background-color: #F0F4F8; color: #000;">주중</th>
@@ -405,180 +735,426 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td rowspan="2" class="term-bg">2026<br>겨울특강</td>
-            <td rowspan="2" class="pink"><b>대수</b></td>
-            <td></td>
-            <td class="yellow">중등기하<br>(<b>2-2</b>)</td>
-            <td rowspan="2"></td>
-        </tr>
-        <tr>
-            <td class="cyan">모의고사반<br>(<b>공수 1·2</b>)</td>
-            <td class="yellow">중등기하<br>(<b>3-2</b>)</td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">1학기</td>
-            <td rowspan="3" class="purple"><b>미적분 I</b></td>
-            <td></td>
-            <td rowspan="2" class="peach"><b>공통수학 1</b></td>
-            <td class="yellow">모의고사반<br>(<b>고1 3모</b>)</td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="pink">모의고사반<br>(<b>~대수</b>)</td>
-        </tr>
-        <tr>
-            <td class="term-bg">여름방학</td>
-            <td rowspan="3" class="cyan"><b>공통수학 2</b></td>
-            <td rowspan="2"></td>
-        </tr>
-        <tr>
-            <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">2학기</td>
-            <td rowspan="2" class="green"><b>확률과 통계</b></td>
-            <td rowspan="2"></td>
-        </tr>
-        <tr>
-            <td class="peach">모의고사반<br>(<b>공수 1</b>)</td>
-        </tr>
-        <tr>
-            <td class="term-bg">겨울방학</td>
-            <td colspan="2" class="blue">모의고사반 FINAL<br>(<b>2028 통합수능</b>)</td>
-            <td colspan="2"><b>대수</b> 선행 시작<br>(ACE 트랙)</td>
-        </tr>
-    </tbody>
+    <!-- 2026 겨울특강 -->
+    <tr>
+        <td rowspan="2" class="term-bg">2026<br>겨울특강</td>
+        <td class="yellow">중등기하<br>(<b>2-2</b>)</td>
+        <td rowspan="2"></td>
+        <td rowspan="2" class="pink"><b>대수</b></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td class="yellow">중등기하<br>(<b>3-2</b>)</td>
+        <td class="cyan">모의고사반<br>(<b>공수 1·2</b>)</td>
+    </tr>
+
+    <!-- 1학기 -->
+    <tr class="term-row-large">
+        <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">1학기</td>
+        <td rowspan="2" class="peach"><b>공통수학 1</b></td>
+        <td class="yellow">모의고사반<br>(<b>고1 3모</b>)</td>
+        <td rowspan="3" class="purple"><b>미적분 I</b></td>
+        <td></td>
+    </tr>
+
+	<tr>
+		<td>&nbsp;<br>&nbsp;</td>
+		<td rowspan="2" class="pink">모의고사반<br>(<b>~대수</b>)</td>
+	</tr>	
+    <!-- 여름방학 -->
+    <tr>
+        <td class="term-bg">여름방학</td>
+        <td rowspan="3" class="cyan"><b>공통수학 2</b></td>
+        <td rowspan="2"></td>
+
+    </tr>
+
+    <!-- 2학기 -->
+    <tr>
+        <td rowspan="2" class="term-bg" style="background-color: #F0F4F8; color: #000;">2학기</td>
+
+        <td rowspan="2" class="green"><b>확률과 통계</b></td>
+        <td></td>
+    </tr>
+	<tr>
+		<td class="peach">모의고사반<br>(<b>공수 1</b>)</td>
+	</tr>
+
+    <!-- 겨울방학 -->
+    <tr>
+        <td class="term-bg">겨울방학</td>
+        <td colspan="2" class="final-strong"><b>대수</b> 선행 시작<br>(ACE 트랙)</td>
+        <td colspan="2" class="blue final-strong">모의고사반 FINAL<br>(<b>2028 통합수능</b>)</td>
+    </tr>
+</tbody>
+
 </table>
         </div>
         
+<div class="schedule-section mock-explain-section">
+
+    <div class="mock-card-inner">
+
+        <!-- 상단 배지 -->
+        <div class="mock-badge">수학습관 모의고사반</div>
+
+        <!-- 타이틀 -->
+        <h3 class="mock-title">
+            선행 학습을 <span>장기 기억</span>으로 만드는 커리큘럼
+        </h3>
+
+        <p class="mock-desc">
+            <b>모의고사 훈련</b>은<br> 뇌과학이 증명하는 최고의 인출 학습이자
+			전이 학습입니다.</p>
+			<div class="learning-keywords">
+				<p><strong>인출 학습</strong>(Retrieval Practice) : 개념을 꺼내는 학습</p>
+				<p><strong>전이 학습</strong>(Transfer Learning) : 새로운 맥락에 적용하는 학습</p>
+		</div>
+			<p class="mock-desc">이러한 학습법은 시간이 지나도 배운 내용을 잊지 않고 꺼내 쓸 수 있는 <strong>장기 기억으로 연결</strong>됩니다.
+        </p>
+
+
+
+        <!-- 흐름 -->
+        <div class="mock-flow-box">
+            <div class="flow-item">단원 학습</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-item">교차 모의고사</div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-item">1:1 개별 첨삭</div>
+        </div>
+
+        <p class="mock-repeat">수학습관 커리큘럼은 단순 반복 선행보다 강력합니다.</p>
+		 <a href="#" class="mock-link">수학습관 고등선행반은 →</a>
+
+        <!-- 하단 포인트 -->
+        <div class="mock-point-box">
+            <p>✔ 스스로 개념을 구조화하고</p>
+            <p>✔ 수능형 사고를 익히며</p>
+            <p>✔ 휘발되지 않는 선행학습을 완성합니다.</p>
+        </div>
+
+    </div>
+</div>
+		
         <div class="qna-section">
-            <h2 class="section-title">Q&A</h2>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="accordion-question">
-                        <span class="question-icon">Q</span>
-                        <span>수업은 어떻게 진행되나요?</span>
-                    </div>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <div class="answer-wrapper">
-                            <span class="answer-icon">A</span>
-                            <div style="flex-grow: 1;">
-                                <p>수학습관의 수업은 학습 효율을 극대화하기 위해 다음 단계를 따르는 **맞춤형 소수정예**로 진행됩니다.</p>
-                                
-                                <ul style="margin-top: 15px; margin-left: 20px; list-style: disc; padding-left: 0;">
-                                    <li style="margin-bottom: 8px;">**개념 완벽 설명:** 핵심 개념을 심도 있게 이해할 때까지 설명합니다.</li>
-                                    <li style="margin-bottom: 8px;">**문제 풀이 및 코칭:** 개별 수준에 맞는 충분한 문제 풀이 시간을 제공하고 1:1 코칭을 진행합니다.</li>
-                                    <li>**오답 관리 및 피드백:** 오답 노트를 기반으로 취약점을 분석하고 완벽한 이해를 목표로 합니다.</li>
-                                </ul>
-                                
-                                <p style="margin-top: 25px; font-weight: bold; color: var(--primary-color);">▶ 정규 수업 구성 예시 (총 3시간)</p>
-                                <table style="width: 100%; margin-top: 10px; border-collapse: collapse; font-size: 15px; border-radius: 5px; overflow: hidden;">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 30%; border: 1px solid #ddd;">시간</th>
-                                            <th style="border: 1px solid #ddd;">진행 내용</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td style="border: 1px solid #ddd;">1교시 (30분)</td>
-                                            <td style="border: 1px solid #ddd;">숙제 검사 및 질의응답 (취약점 점검)</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #ddd;">2교시 (60분)</td>
-                                            <td style="border: 1px solid #ddd;">새로운 핵심 개념 및 원리 설명</td>
-                                        </tr>
-                                        <tr>
-                                            <td style="border: 1px solid #ddd;">3교시 (90분)</td>
-                                            <td style="border: 1px solid #ddd;">개별 맞춤 문제 풀이 및 1:1 집중 코칭</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+    <h2 class="section-title">Q&A</h2>
+
+    <!-- Q1 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-question">
+                <span class="question-icon">Q</span>
+                <span>모의고사반은 어떤 역할인가요? 왜 주말에 따로 운영하나요?</span>
+            </div>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-content-inner">
+                <div class="answer-wrapper">
+                    <span class="answer-icon">A</span>
+                    <div>
+                        <p>
+                            모의고사반은 단순한 실전 대비가 아니라,<br>
+                            <b>배운 개념을 다시 꺼내어 연결해 보는 핵심 복습 과정</b>입니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            단원 수업이 ‘개념을 배우는 시간’이라면,<br>
+                            모의고사반은 그 개념을 다른 유형과 맥락에서 실제로 적용해 보는 시간입니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            이 과정이 있어야 선행에서 배운 내용이 오래 남고,<br>
+                            개념을 적용하는 사고 과정도 훨씬 또렷하게 잡힙니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            주말에 따로 운영하는 이유는<br>
+                            평일 진도와 분리해 배운 내용을 안정적으로 점검하는 구조를 만들기 위함입니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            아이들은 이 과정에서<br>
+                            “배운 내용이 이렇게 문제에서 연결되는구나”를 직접 경험하게 됩니다.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="accordion-question">
-                        <span class="question-icon">Q</span>
-                        <span>ACE트랙과 고등선행반의 차이는 무엇인가요?</span>
-                    </div>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <div class="answer-wrapper">
-                            <span class="answer-icon">A</span>
-                            <span>**ACE트랙**은 수능 완성을 목표로 하는 **심화 과정**으로, 이미 기본 과정을 마친 학생들을 위한 트랙입니다. **고등선행반**은 중학생 또는 고등학교 과정을 준비하는 학생들을 위한 **선행학습 과정**입니다.</span>
-                        </div>
+        </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-question">
+                <span class="question-icon">Q</span>
+                <span>선행 단계에서 모의고사를 풀어도 괜찮나요? 아이가 부담되지는 않을까요?</span>
+            </div>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-content-inner">
+                <div class="answer-wrapper">
+                    <span class="answer-icon">A</span>
+                    <div>
+                        <p>
+                            가능합니다. 그리고 <b>선행 단계에서 할 때 오히려 효과가 더 큽니다.</b>
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            그동안 선행 단계에서 모의고사를 적극적으로 활용하지 않았던 이유는,<br>
+                            기존 학습 방식이 ‘진도 중심’에 가까웠기 때문입니다.
+                        </p>
+
+                        <ul style="margin: 12px 0 12px 20px; list-style: disc;">
+                            <li>빠르게 진도를 나가야 한다는 분위기</li>
+                            <li>중등 선생님 중심의 지도 구조</li>
+                            <li>모의고사를 ‘실전 감각 익히기’로만 바라보던 문화</li>
+                        </ul>
+
+                        <p>
+                            하지만 통합 수능의 개편된 범위는<br>
+                            중등·고1 단계에서도 충분히 다룰 수 있어,<br>
+                            진도 부담 없이 수능형 사고 훈련을 자연스럽게 시작할 수 있습니다.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="accordion-question">
-                        <span class="question-icon">Q</span>
-                        <span>수강료는 어떻게 되나요?</span>
-                    </div>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <div class="answer-wrapper">
-                            <span class="answer-icon">A</span>
-                            <span>수강료는 과정별, 주중/주말반에 따라 다르게 책정됩니다. 자세한 수강료 안내는 **전화 또는 방문 상담**을 통해 확인하실 수 있습니다. 형제 할인 등 다양한 할인 혜택도 제공하고 있습니다.</span>
-                        </div>
+        </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-question">
+                <span class="question-icon">Q</span>
+                <span>모의고사를 병행하면 선행 속도가 느려지지 않나요?</span>
+            </div>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-content-inner">
+                <div class="answer-wrapper">
+                    <span class="answer-icon">A</span>
+                    <div>
+                        <p>
+                            느려지지 않습니다.<br>
+                            오히려 선행이 흔들리지 않도록 <b>개념의 연결을 잡아주는 역할</b>을 합니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            선행이 중간에 막히는 가장 큰 이유는<br>
+                            배운 개념들이 서로 이어지지 않아 다음 단원에서 계속 헷갈리기 때문입니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            모의고사는
+                        </p>
+
+                        <ul style="margin: 8px 0 8px 20px; list-style: disc;">
+                            <li><b>인출 연습(Retrieval Practice)</b>으로 배운 내용을 스스로 꺼내 보고</li>
+                            <li><b>교차 연습(Interleaving Practice)</b>으로 다른 맥락에서 다시 적용해 보게 하여</li>
+                        </ul>
+
+                        <p>
+                            개념들이 자연스럽게 이어지도록 돕습니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            개념이 연결되면 다음 단원도 훨씬 수월해져,<br>
+                            선행 속도는 느려지지 않고 오히려 더 안정적으로 이어집니다.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="accordion-question">
-                        <span class="question-icon">Q</span>
-                        <span>중간에 반 변경이 가능한가요?</span>
-                    </div>
-                    <span class="accordion-icon">▼</span>
-                </div>
-                <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <div class="answer-wrapper">
-                            <span class="answer-icon">A</span>
-                            <span>학생의 학습 진도와 이해도에 따라 **반 변경이 가능**합니다. 정기적인 테스트와 상담을 통해 학생에게 가장 적합한 반 배치를 도와드립니다. 변경 시에는 별도 상담이 필요합니다.</span>
-                        </div>
+        </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+            <div class="accordion-question">
+                <span class="question-icon">Q</span>
+                <span>모의고사반 범위가 주중 정규반 진도와 다른 이유는 무엇인가요?</span>
+            </div>
+            <span class="accordion-icon">▼</span>
+        </div>
+        <div class="accordion-content">
+            <div class="accordion-content-inner">
+                <div class="answer-wrapper">
+                    <span class="answer-icon">A</span>
+                    <div>
+                        <p>
+                            일부러 그렇게 설계합니다.<br>
+                            <b>이전 내용을 다시 꺼내 보는 것이 가장 효과적인 복습</b>이기 때문입니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            학습과학에서는 이를 <b>분산 학습(Spaced-out Practice)</b>이라고 부르며,<br>
+                            시간이 지난 뒤 다른 맥락에서 다시 떠올리는 경험이
+                            기억을 오래 남기고 사고를 더 유연하게 만든다고 설명합니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            그래서 수학습관의 모의고사반은<br>
+                            현재 진도와 동일한 범위가 아니라,<br>
+                            이전 단원을 다시 꺼내 보도록 설계되어 있습니다.
+                        </p>
+
+                        <p style="margin-top: 12px;">
+                            이 구조 덕분에<br>
+                            이전 단원과 새로운 단원이 자연스럽게 이어지고,<br>
+                            선행 진도도 훨씬 안정적으로 유지됩니다.
+                        </p>
                     </div>
                 </div>
             </div>
-            
-            <div class="accordion-item">
-                <div class="accordion-header" onclick="toggleAccordion(this)">
-                    <div class="accordion-question">
-                        <span class="question-icon">Q</span>
-                        <span>등록은 어떻게 하나요?</span>
-                    </div>
-                    <span class="accordion-icon">▼</span>
+        </div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-question">
+            <span class="question-icon">Q</span>
+            <span>학기 중 등록도 가능한가요?</span>
+        </div>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-content-inner">
+            <div class="answer-wrapper">
+                <span class="answer-icon">A</span>
+                <div>
+                    <p>
+                        가능합니다. 다만 <b>모든 경우에 바로 합류가 가능한 것은 아닙니다.</b>
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        3월 이후 등록의 경우에는  
+                        현재 진행 중인 진도를 무리 없이 따라올 수 있는지를 먼저 확인하기 위해  
+                        <b>상담과 진단(필요 시 간단한 레벨 테스트)</b>를 진행합니다.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        합류가 가능하다고 판단되면,  
+                        필요한 부분은 <b>개별 진도 보완</b>을 통해 자연스럽게 이어갈 수 있도록 돕습니다.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        다만 수학습관 커리큘럼은  
+                        단원 간 흐름과 선행 구조가 연결되어 있어,  
+                        <b>가장 안정적인 출발 시점은 겨울특강 또는 학기 초</b>입니다.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        3월 이후 등록을 고려 중이시라면  
+                        현재 상황에 맞는 합류 가능 여부를  
+                        상담을 통해 안내드리고 있습니다.
+                    </p>
                 </div>
-                <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <div class="answer-wrapper">
-                            <span class="answer-icon">A</span>
-                            <span>**전화 상담 또는 방문 상담 후 레벨테스트**를 진행하여 적합한 반을 배정받으신 후 등록하실 수 있습니다. 선착순 마감되므로 빠른 상담을 권장드립니다.</span>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+	<div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-question">
+            <span class="question-icon">Q</span>
+            <span>수강료는 얼마인가요?</span>
+        </div>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-content-inner">
+            <div class="answer-wrapper">
+                <span class="answer-icon">A</span>
+                <div>
+                    <p>
+                        기본 수강료는 <b>8회 기준 40만 원</b>입니다.
+                    </p>
+
+                    <p style="margin-top: 12px;">
+                        다만 <b>수능완성반(ACE 트랙)</b>의 경우,<br>
+                        <b>3월 이후 등록부터는 8회 기준 48만 원</b>으로 인상됩니다.
+                    </p>
+
+                    <p style="margin-top: 16px; font-weight: 600; color: var(--primary-color);">
+                        📞 상담 및 문의 안내 : 010-5347-6200
+                    </p>
+
+                    <p style="margin-top: 8px;">
+                        수업 중에는 전화를 받기 어려운 경우가 많아,<br>
+                        <b>문자로 학년과 현재 진도</b>를 남겨주시면<br>
+                        확인 후 연락드리고 있습니다.
+                    </p>
+
+                    <p style="margin-top: 8px;">
+                        예) 중2 / 공통수학 1 선행 중
+                    </p>
                 </div>
-				    <div class="download-section">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="accordion-item">
+    <div class="accordion-header" onclick="toggleAccordion(this)">
+        <div class="accordion-question">
+            <span class="question-icon">Q</span>
+            <span>등록은 어떻게 하나요?</span>
+        </div>
+        <span class="accordion-icon">▼</span>
+    </div>
+    <div class="accordion-content">
+        <div class="accordion-content-inner">
+            <div class="answer-wrapper">
+                <span class="answer-icon">A</span>
+                <div>
+                    <p>
+                        수학습관은 <b>상담 → 진단 → 반 배정</b>의 절차를 통해 등록이 진행됩니다.
+                    </p>
+
+                    <ul style="margin: 12px 0 12px 20px; list-style: disc;">
+                        <li>전화 또는 문자로 상담 문의</li>
+                        <li>학생 현재 학습 단계 상담 및 필요 시 진단</li>
+                        <li>학생에게 가장 적합한 반 배정</li>
+                        <li>등록 및 수업 시작</li>
+                    </ul>
+
+                    <p>
+                        모든 수업은 <b>소수 정예로 운영</b>되며,  
+                        반별 정원이 정해져 있어 선착순으로 마감될 수 있습니다.
+                    </p>
+
+                    <p style="margin-top: 16px; font-weight: 600; color: var(--primary-color);">
+                        📞 상담 및 문의 안내 : 010-5347-6200
+                    </p>
+
+                    <p style="margin-top: 8px;">
+                        수업 중에는 전화를 받기 어려운 경우가 많아,<br>
+                        <b>문자로 학년과 현재 진도</b>를 남겨주시면<br>
+                        확인 후 연락드리고 있습니다.
+                    </p>
+
+                    <p style="margin-top: 8px;">
+                        예) 중2 / 공통수학 1 선행 중
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- 다운로드 -->
+    <div class="download-section">
         <a href="curriculum.pdf" download class="download-btn">
             📥 커리큘럼 다운로드
         </a>
     </div>
-            </div>
+</div>
         </div>
-    </div>
     
     <script>
         function toggleAccordion(header) {
