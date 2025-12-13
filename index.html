@@ -1225,8 +1225,27 @@
             }
         }
     </script>
+
+	<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var downloadBtn = document.querySelector(".download-btn");
+
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", function () {
+        if (typeof fbq === "function") {
+          fbq('track', 'Lead', {
+            content_name: '커리큘럼 다운로드',
+            content_type: 'pdf_or_image',
+            page: window.location.pathname
+          });
+        }
+      });
+    }
+  });
+</script>
 </body>
 </html>
+
 
 
 
